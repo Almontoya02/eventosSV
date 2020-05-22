@@ -1,0 +1,35 @@
+{
+    "idEvento": 1,
+    "nombre": "Despedida Albertano",
+    "descripcion": "En este evento la pasarás bien buen >:V",
+    "fecha": "2020-06-23T18:25:43.511Z",
+    "lugar": "Medallo papá",
+    "asistentes": [{
+            "cedula": "1036683861",
+            "nombre": "Alejandro Montoya",
+            "correo": "almontoya02@outlook.com",
+            "telefono": "3102476288",
+            "tipo": "asistente"
+        },
+        {
+            "cedula": "115372812",
+            "nombre": "Elmito chiquito",
+            "correo": "elmo-chito@gmail.com",
+            "telefono": "3166666666",
+            "tipo": "anfitrion"
+        }
+    ],
+    "actividades": [{
+            "id": 1,
+            "nombre": "bolera",
+            "descripcion": "No lo sé tú dime",
+            "duracion": 30
+        },
+        {
+            "id": 2,
+            "nombre": "baile",
+            "descripcion": "carranga bien buena",
+            "duracion": 30
+        }
+    ]
+}
