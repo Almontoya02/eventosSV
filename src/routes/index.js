@@ -3,7 +3,7 @@ const router = express.Router();
 
 const evento = require('../models/eventos');
 
-router.get('/eventos', async (req,res) => {
+router.get('/', async (req,res) => {
 
     const eventos = await evento.find();
     console.log(eventos);
@@ -12,6 +12,8 @@ router.get('/eventos', async (req,res) => {
 
 router.post('/add',async (req,res) =>{
     const event = new evento(req.body);
+    console.log(req.body);
+    console.log(event)
     await event.save();
     res.send('ok');
 });
