@@ -22,7 +22,7 @@ app.set('view engine','ejs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 //routes
-app.use('/eventos', indexRoutes);
+app.use('/', indexRoutes);
 //starting the server
 app.listen(app.get('port'), ()=>{
     console.log('corriendo en puerto '+app.get('port'));
