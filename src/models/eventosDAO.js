@@ -6,15 +6,14 @@ class eventosDAO {
     }
 
     getEventos() { 
-         data;
+       return data;
     }
 
     postEventos(evento){
         try{
             data.push(evento);
             return this.getEventos();
-        } 
-        catch (error){
+        } catch (error){
             return error;
         }
     } 

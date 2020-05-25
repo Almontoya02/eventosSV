@@ -6,10 +6,7 @@ var daoEventos = new eventosDAO();
 
 router.get('/', function (req,res) {
     var data = daoEventos.getEventos();
-    console.log(data);
-    res.send("holi soy el get de eventos");
-   // res.send(data);
-
+    res.json(data);
 });
 
 router.post('/add', function (req,res) {
@@ -60,9 +57,7 @@ router.post('/add', function (req,res) {
     eventosJSON['asistentes'] = asistentes;
     eventosJSON['actividades'] = actividades;
 
-    daoEventos.postEventos(eventosJSON);
-    console.log(eventosJSON);
-    res.send("holi soy el post de eventos");
+    res.json(daoEventos.postEventos(eventosJSON));  
 });
 
 module.exports= router;

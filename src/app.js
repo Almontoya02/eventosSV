@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/eventos')
     .then(db=> console.log('DB connected'))
     .catch(err => console.log(err));
 //importing routes
-const indexRoutes = require('./routes/index');
+const indexRoutes = require('./routes/index.js');
 
 //settings
 app.set('port', process.env.PORT || 3000);
@@ -20,7 +20,9 @@ app.set('view engine','ejs');
 
 //middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false})); //alejo lo tenia el false. prueba cambiando a true
+//app.use(express.json()); // probar
+
 //routes
 app.use('/', indexRoutes);
 //starting the server
