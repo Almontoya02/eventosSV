@@ -3,10 +3,16 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 const app = express();
 
+//middlewares
+app.use(morgan('dev'));
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false })) //alejo lo tenia el false. prueba cambiando a true
+//app.use(express.json()); // probar
+app.use(bodyParser.json())
 
 //connecting to db
 /*mongoose.connect('mongodb://localhost/eventos')
@@ -20,11 +26,6 @@ app.set('port', process.env.PORT || 3000
 );
 app.set('views',path.join(__dirname+'views'));
 app.set('view engine','ejs');
-
-//middlewares
-app.use(morgan('dev'));
-app.use(express.urlencoded({extended: true})); //alejo lo tenia el false. prueba cambiando a true
-//app.use(express.json()); // probar
 
 //routes
 app.use('/', indexRoutes);

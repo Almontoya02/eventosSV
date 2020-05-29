@@ -20,7 +20,7 @@ class eventosDAO {
 
     putEventoId(id, nombreB, descripcion, fecha, lugar){
         let evento = this.getEventoId(id)
-        console.log(evento.message.nombre)
+        console.log(evento.message)
         evento.message.nombre = nombreB
         evento.message.descripcion = descripcion
         evento.message.fecha = fecha
