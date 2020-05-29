@@ -2,9 +2,11 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 const app = express();
 
+app.use(cors())
 
 //connecting to db
 /*mongoose.connect('mongodb://localhost/eventos')
@@ -21,7 +23,7 @@ app.set('view engine','ejs');
 
 //middlewares
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false})); //alejo lo tenia el false. prueba cambiando a true
+app.use(express.urlencoded({extended: true})); //alejo lo tenia el false. prueba cambiando a true
 //app.use(express.json()); // probar
 
 //routes

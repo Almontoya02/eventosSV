@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="C:\Users\aleja\OneDrive\Escritorio\UNIVERSIDAD\SW5\EventosNuevo\eventosSV\src\routes\index.js"> </script>
+    <!-- <link rel="stylesheet" href="C:\Users\aleja\OneDrive\Escritorio\UNIVERSIDAD\SW5\EventosNuevo\eventosSV\src\routes\estilo.css">-->
+
+</head>
+<body >
+      <div class="contenedor"> BIENVENIDO <span id="nombre"></span></div> 
+      <h1>Seleccione el tipo de evento</h1>
+      <div><label> Informacion de eventos
+        <input type="radio">
+      </label></div>
+    <div><label> Informacion de asistentes
+        <input type="radio">
+      </label></div>
+     <div> <label> Informacion de actividades
+        <input type="radio">
+      </label></div>
+      <p>
+        <button onclick="obtener_datos()">Enviar</button>
+      </p>
+
+
+      <script>
+        function obtener_datos(){
+          fetch("http://localhost:3000/eventos", {
+            method: 'GET',
+            headers: {
+              'Accepts': 'application/json',
+              'Content-type': 'application/json' 
+            }
+          })
+          .then(res => res.json())
+          .then(data => console.log(data))
+        }
+
+        // post
+
+        // let Datos = {.json}
+
+        // console.log(Datos)
+
+        // function mandar_datos(){
+        //   fetch("http://localhost:3000/add", {
+        //     method: 'POST',
+        //     body: JSON.stringify(this.Datos),
+        //     headers: {
+        //       'Accepts': 'application/json',
+        //       'Content-type': 'application/json' 
+        //     }
+        //   })
+        //   .then(res => res.json())
+        //   .then(data => console.log(data))
+        // }
+      </script>
+</body>
+</html>

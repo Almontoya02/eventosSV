@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 const eventosDAO = require('../models/eventosDAO.js');
 var daoEventos = new eventosDAO();
 
@@ -8,13 +9,6 @@ router.get('/eventos', function (req,res) {
     var data = daoEventos.getEventos();
     res.json(data);
 });
-/// esto no funciona falta completarlo
-router.put('/eventos', function (req, res){
-var data = daoEventos.getEventos();
-    
-});
-/// esto tampoco faltan completarlos
-router.get('/eventos/{id}/asistentes/{id},' )
 
 router.post('/eventos', function (req,res) {
     var asistentes = [];
@@ -66,5 +60,34 @@ router.post('/eventos', function (req,res) {
 
     res.json(daoEventos.postEventos(eventosJSON));  
 });
+
+//Encontrar un evento por su ID
+router.get('/evento/:id', (req, res) => {
+    let id = req.params.id
+    let eventoId = daoEventos.getEventoId(id)
+
+    return res.status(200).send(eventoId.message)
+})
+
+router.put('/evento/:id', (req, res) => {
+    let id = req.params.id
+    let nombreB = req.body.nombre
+    let descripcionB = req.body.descripcion
+    let fechaB = req.body.fecha
+    let lugarB = req.body.lugar
+
+    console.log(nombreB)
+
+    let actualizarEvento = daoEventos.putEventoId(id, nombreB, descripcionB, fechaB, lugarB)
+
+    return res.status(200).send(actualizarEvento.message)
+})
+
+router.delete('/evento/:id', (req, res) => {
+    let id = req.params.id
+    let eliminarEvento = daoEventos.deleteEventoId(id)
+
+    return res.status(200).send(eliminarEvento.message)
+})
 
 module.exports= router;
