@@ -75,9 +75,8 @@ class eventosDAO {
         let evento = this.getEventoId(id)
         console.log(evento.message)
         if(evento.message != "No encontra"){
-            delete evento.message
             return {
-                message: true
+                message: delete evento.message,
             }
         }else{
             return {

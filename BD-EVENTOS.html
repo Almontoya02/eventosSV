@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="C:\Users\aleja\OneDrive\Escritorio\UNIVERSIDAD\SW5\EventosNuevo\eventosSV\src\routes\index.js"> </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="C:\Users\aleja\OneDrive\Escritorio\UNIVERSIDAD\SW5\EventosNuevo\eventosSV\src\routes\estilo.css">-->
 
 </head>
 <body >
-      <div class="contenedor"> BIENVENIDO <span id="nombre"></span></div> 
+      <!-- <div class="contenedor"> BIENVENIDO <span id="nombre"></span></div> 
       <h1>Seleccione el tipo de evento</h1>
       <div><label> Informacion de eventos
         <input type="radio">
@@ -37,72 +37,150 @@
 
       <div>
         <button onclick="eliminar_datos()"> ELIMINAR </button>
+      </div> -->
+
+      <div class="container p-4">
+          <h1>BIENVENIDO</h1>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Informacion de eventos
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+              Informacion de asistentes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Informacion de actividades
+            </label>
+          </div>
+
+
+        <div class="row p-4">
+          <button onclick="obtener_datos()" class="btn btn-dark">OBTENER EVENTOS</button>
+        </div>
+
+        <div class="row p-4">
+          <div class="card text-center">
+            <div class="card-header">
+              <h3>ACTUALIZAR</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="descripcion" placeholder="Descripcion">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="fecha" placeholder="Fecha">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="lugar" placeholder="Lugar">
+                </div>
+
+                <div class="form-group">
+                  <button onclick="actualizar_datos()" class="btn btn-dark btn-block">ACTUALIZAR</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <textarea name="EVENTOS" id="eventos" cols="30" rows="10"></textarea>
+
+        <div>
+          <button onclick="eliminar_datos()" class="btn btn-dark"> ELIMINAR </button>
+        </div>
       </div>
 
-      <script>
-        function obtener_datos(){
-          fetch("http://localhost:3000/eventos", {
-            method: 'GET',
-            headers: {
-              'Accepts': 'application/json',
-              'Content-type': 'application/json' 
-            }
-          })
-          .then(res => res.json())
-          .then(data => console.log(data))
+  <script>
+    function obtenerDatos(datos){
+      datos.map((datos, i) => {
+        let nombreEvento = document.createElement('h1')
+        let contenido = document.createElement('p')
+
+        nombreEvento.innerHTML = datos.nombre
+        contenido.innerHTML = datos.descripcion + '\n' + datos.fecha + '\n' + datos.lugar
+      })
+    }
+
+    function obtener_datos(){
+      var post = null
+      fetch("http://localhost:3000/eventos", {
+        method: 'GET',
+        headers: {
+          'Accepts': 'application/json',
+          'Content-type': 'application/json'
         }
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        post = data
+        obtenerDatos(post)
+      })
+    }
 
-        function actualizar_datos(){
-          let datos = {
-            nombre: document.getElementById('nombre'),
-            descripcion: document.getElementById('descripcion'),
-            fecha: document.getElementById('fecha'),
-            lugar: document.getElementById('lugar')
-          }
-          fetch("http://localhost:3000/eventos/1", {
-            method: 'PUT',
-            body: JSON.stringify(datos),
-            headers: {
-              'Accepts': 'application/json',
-              'Content-type': 'application/json'
-            }
-          })
-          .then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(data => console.log(data))
+    function actualizar_datos(){
+      let datos = {
+        nombre: document.getElementById('nombre'),
+        descripcion: document.getElementById('descripcion'),
+        fecha: document.getElementById('fecha'),
+        lugar: document.getElementById('lugar')
+      }
+      fetch("http://localhost:3000/eventos/1", {
+        method: 'PUT',
+        body: JSON.stringify(datos),
+        headers: {
+          'Accepts': 'application/json',
+          'Content-type': 'application/json'
         }
-
-        function eliminar_datos(){
-          fetch("http://localhost:3000/eventos/1", {
-            method: 'DELETE',
-            headers: {
-              'Accepts': 'application/json',
-              'Content-type': 'application/json'
-            }
-          })
-          .then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(data => console.log(data))
+      })
+      .then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(data => console.log(data))
+    }
+    function eliminar_datos(){
+      fetch("http://localhost:3000/eventos/1", {
+        method: 'DELETE',
+        headers: {
+          'Accepts': 'application/json',
+          'Content-type': 'application/json'
         }
+      })
+      .then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(data => console.log(data))
+    }
 
-        // post
+    // post
 
-        // let Datos = {.json}
+    // let Datos = {.json}
 
-        // console.log(Datos)
+    // console.log(Datos)
 
-        // function mandar_datos(){
-        //   fetch("http://localhost:3000/add", {
-        //     method: 'POST',
-        //     body: JSON.stringify(this.Datos),
-        //     headers: {
-        //       'Accepts': 'application/json',
-        //       'Content-type': 'application/json' 
-        //     }
-        //   })
-        //   .then(res => res.json())
-        //   .then(data => console.log(data))
-        // }
-      </script>
+    // function mandar_datos(){
+    //   fetch("http://localhost:3000/add", {
+    //     method: 'POST',
+    //     body: JSON.stringify(this.Datos),
+    //     headers: {
+    //       'Accepts': 'application/json',
+    //       'Content-type': 'application/json' 
+    //     }
+    //   })
+    //   .then(res => res.json())
+    //   .then(data => console.log(data))
+    // }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

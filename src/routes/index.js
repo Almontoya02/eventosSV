@@ -83,7 +83,7 @@ router.put('/eventos/:id', (req, res) => {
 
     return res.status(200).send({
         status: actualizarEvento.message,
-        message: "Eliminado correctamente"
+        message: "Actualizado correctamente"
     })
 })
 
@@ -92,7 +92,7 @@ router.delete('/eventos/:id', (req, res) => {
     let id = req.params.id
     let eliminarEvento = daoEventos.deleteEventoId(id)
 
-    return res.status(200).send(eliminarEvento.message)
+    return res.status(200).send(eliminarEvento)
 })
 
 module.exports= router;
