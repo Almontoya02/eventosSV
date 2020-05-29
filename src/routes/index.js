@@ -69,7 +69,7 @@ router.get('/evento/:id', (req, res) => {
     return res.status(200).send(eventoId.message)
 })
 
-router.put('/evento/:id', (req, res) => {
+router.put('/eventos/:id', (req, res) => {
     let id = req.params.id
     let nombreB = req.body.nombre
     let descripcionB = req.body.descripcion

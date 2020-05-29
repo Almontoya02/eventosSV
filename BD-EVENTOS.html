@@ -25,6 +25,14 @@
       </p>
 
 
+      <div>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="descripcion" placeholder="descripcion">
+        <input type="text" id="fecha" placeholder="fecha">
+        <input type="text" id="lugar" placeholder="lugar">
+        <button onclick="actualizar_datos()"> ACTUALIZAR </button>
+      </div>
+
       <script>
         function obtener_datos(){
           fetch("http://localhost:3000/eventos", {
@@ -35,6 +43,26 @@
             }
           })
           .then(res => res.json())
+          .then(data => console.log(data))
+        }
+
+        function actualizar_datos(){
+          let datos = {
+            nombre: document.getElementById('nombre'),
+            descripcion: document.getElementById('descripcion'),
+            fecha: document.getElementById('fecha'),
+            lugar: document.getElementById('lugar')
+          }
+          fetch("http://localhost:3000/eventos/1", {
+            method: 'PUT',
+            body: JSON.stringify(datos),
+            headers: {
+              'Accepts': 'application/json',
+              'Content-type': 'application/json'
+            }
+          })
+          .then(res => res.json())
+          .catch(error => console.error('Error:', error))
           .then(data => console.log(data))
         }
 
