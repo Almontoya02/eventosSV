@@ -33,6 +33,12 @@
         <button onclick="actualizar_datos()"> ACTUALIZAR </button>
       </div>
 
+
+
+      <div>
+        <button onclick="eliminar_datos()"> ELIMINAR </button>
+      </div>
+
       <script>
         function obtener_datos(){
           fetch("http://localhost:3000/eventos", {
@@ -56,6 +62,19 @@
           fetch("http://localhost:3000/eventos/1", {
             method: 'PUT',
             body: JSON.stringify(datos),
+            headers: {
+              'Accepts': 'application/json',
+              'Content-type': 'application/json'
+            }
+          })
+          .then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(data => console.log(data))
+        }
+
+        function eliminar_datos(){
+          fetch("http://localhost:3000/eventos/1", {
+            method: 'DELETE',
             headers: {
               'Accepts': 'application/json',
               'Content-type': 'application/json'

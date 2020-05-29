@@ -69,6 +69,7 @@ router.get('/evento/:id', (req, res) => {
     return res.status(200).send(eventoId.message)
 })
 
+//ACTUALIZAR UN EVENTO, SOLO LOS DATOS nombre, descripcion, fecha y lugar
 router.put('/eventos/:id', (req, res) => {
     let id = req.params.id
     let nombreB = req.body.nombre
@@ -80,10 +81,14 @@ router.put('/eventos/:id', (req, res) => {
 
     let actualizarEvento = daoEventos.putEventoId(id, nombreB, descripcionB, fechaB, lugarB)
 
-    return res.status(200).send(actualizarEvento.message)
+    return res.status(200).send({
+        status: actualizarEvento.message,
+        message: "Eliminado correctamente"
+    })
 })
 
-router.delete('/evento/:id', (req, res) => {
+//ELIMINAR UN EVENTO POR EL id
+router.delete('/eventos/:id', (req, res) => {
     let id = req.params.id
     let eliminarEvento = daoEventos.deleteEventoId(id)
 
