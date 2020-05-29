@@ -4,12 +4,19 @@ const router = express.Router();
 const eventosDAO = require('../models/eventosDAO.js');
 var daoEventos = new eventosDAO();
 
-router.get('/', function (req,res) {
+router.get('/eventos', function (req,res) {
     var data = daoEventos.getEventos();
     res.json(data);
 });
+/// esto no funciona falta completarlo
+router.put('/eventos', function (req, res){
+var data = daoEventos.getEventos();
+    
+});
+/// esto tampoco faltan completarlos
+router.get('/eventos/{id}/asistentes/{id},' )
 
-router.post('/add', function (req,res) {
+router.post('/eventos', function (req,res) {
     var asistentes = [];
     var actividades = [];
     var eventosJSON = { 
@@ -33,19 +40,19 @@ router.post('/add', function (req,res) {
 
     for (var i = 0; i < asistentesAux.length; i++){
         var asistentesJSON = {
-            "nombre":""
+            "id":""
         }
     
-        asistentesJSON['nombre'] = asistentesAux[i];
+        asistentesJSON['id'] = asistentesAux[i];
         asistentes.push(asistentesJSON);
     }
     
     for (var i = 0; i < actividadesAux.length; i++){
         var actividadesJSON = {
-            "nombre":""
+            "id":""
         }
     
-        actividadesJSON['nombre'] = actividadesAux[i];
+        actividadesJSON['id'] = actividadesAux[i];
         actividades.push(actividadesJSON);
     }
 

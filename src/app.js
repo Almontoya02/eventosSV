@@ -7,14 +7,15 @@ const app = express();
 
 
 //connecting to db
-mongoose.connect('mongodb://localhost/eventos')
+/*mongoose.connect('mongodb://localhost/eventos')
     .then(db=> console.log('DB connected'))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err)); */
 //importing routes
 const indexRoutes = require('./routes/index.js');
 
 //settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000
+);
 app.set('views',path.join(__dirname+'views'));
 app.set('view engine','ejs');
 
